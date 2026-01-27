@@ -27,6 +27,11 @@ pnpm nuxt typecheck # pnpm vue-tsc --noEmit ne fonctionne pas ?
 echo -e "${GREEN}[✓] Type checking passed${NC}"
 echo ""
 
+echo -e "${YELLOW}Step 3: Static analysis with ESLint...${NC}"
+pnpm eslint "app/**/*.{vue,ts}"
+echo -e "${GREEN}[✓] Static analysis passed${NC}"
+echo ""
+
 echo -e "${BLUE}=================================${NC}"
 echo -e "${BLUE} Pipeline Completed Successfully ${NC}"
 echo -e "${BLUE}=================================${NC}"
