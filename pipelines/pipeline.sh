@@ -32,6 +32,12 @@ pnpm eslint "app/**/*.{vue,ts}"
 echo -e "${GREEN}[✓] Static analysis passed${NC}"
 echo ""
 
+echo -e "${YELLOW}Step 4: Building production package...${NC}"
+rm -rf publish
+pnpm nuxi build # vite is used by nuxt 
+echo -e "${GREEN}[✓] Production package built successfully${NC}"
+echo ""
+
 echo -e "${BLUE}=================================${NC}"
 echo -e "${BLUE} Pipeline Completed Successfully ${NC}"
 echo -e "${BLUE}=================================${NC}"

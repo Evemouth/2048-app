@@ -18,5 +18,12 @@ export default defineNuxtConfig({
   },
 
   // Client-side only for the game
-  ssr: false
+  ssr: false,
+
+  // Build configuration
+  nitro: {
+    output: {
+      dir: './publish'
+    }
+  }
 })
