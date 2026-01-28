@@ -14,6 +14,14 @@
 - Vitest
 - ESLint
 
+**Dépôts distants Git**
+- Remotes → dépôts distants centralisés sur lesquels on se branche (par défaut appelé *origin*)
+- Version locale
+- Pull (fetch + merge ou rebase) → je veux chercher cette version (remote) là
+- `git remote -v` → liste des remotes
+- `git remote add <nomRemote> <urlDepotRemote>` → ajouter une remote
+- `git pull upstream main`
+
 ## Méthodologie adoptée
 
 - Lecture de la documentation des différents plugins : Vite, Vitest, ESLint
