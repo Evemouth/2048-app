@@ -17,8 +17,6 @@ echo ""
 
 echo -e "${YELLOW}Step 1: Installing dependencies from cache...${NC}"
 pnpm install
-rm -rf node_modules
-pnpm install
 echo -e "${GREEN}[✓] Dependencies installed${NC}" 
 echo ""
 
