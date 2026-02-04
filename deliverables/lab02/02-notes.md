@@ -12,7 +12,9 @@
 - Nuxt
 - Vite
 - Vitest
-- ESLint
+- ESLint → détecter les logs pas nécessaire dans le code, choisir des règles ou normes de codage...
+    - `eslint . --fix` → peut fixer certaines erreurs
+    - dans package.json → script → raccourcis pour des commandes
 
 **Dépôts distants Git**
 - Remotes → dépôts distants centralisés sur lesquels on se branche (par défaut appelé *origin*)
@@ -20,7 +22,13 @@
 - Pull (fetch + merge ou rebase) → je veux chercher cette version (remote) là
 - `git remote -v` → liste des remotes
 - `git remote add <nomRemote> <urlDepotRemote>` → ajouter une remote
-- `git pull upstream main`
+- `git branch -al` → indique sur quelle branche pointe le pointeur
+- `git pull <nomRemote> main` → récupérer les modifications du dépôt distant
+
+**Utilisation Agent**
+- Récupérer la sortie d'un terminal (pour les erreurs) → `#`
+- Utilisation des agents en CLI
+- Demander à l'IA d'expliquer les erreurs, les bonnes pratiques, la documentation...
 
 ## Méthodologie adoptée
 
