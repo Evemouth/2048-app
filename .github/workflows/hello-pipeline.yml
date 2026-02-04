@@ -1,0 +1,9 @@
+name: Hello Pipelines World
+run-name: Hello pipelines' world pipeline
+on: [push]
+jobs:
+  hello-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Say Hello
+        run: echo "Hello pipelines' world !"
