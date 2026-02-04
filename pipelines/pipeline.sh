@@ -26,7 +26,7 @@ echo -e "${GREEN}[✓] Type checking passed${NC}"
 echo ""
 
 echo -e "${YELLOW}Step 3: Static analysis with ESLint...${NC}"
-pnpm eslint "app/**/*.{vue,ts}"
+pnpm eslint . --ext .ts,.vue
 echo -e "${GREEN}[✓] Static analysis passed${NC}"
 echo ""
 
