@@ -17,6 +17,13 @@ export default defineNuxtConfig({
     }
   },
 
+  // ESLint configuration
+  eslint: {
+    config: {
+      standalone: false
+    }
+  },
+
   // Client-side only for the game
   ssr: false
 })

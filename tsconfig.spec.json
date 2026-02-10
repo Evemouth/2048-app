@@ -4,5 +4,5 @@
     "composite": true,
     "types": ["vitest/globals", "node"]
   },
-  "include": ["app/**/*.spec.ts", "app/**/*.test.ts"]
+  "include": ["app/**/*.ts", "app/**/*.test.ts", "app/**/*.spec.ts", "app/**/*.vue"]
 }
