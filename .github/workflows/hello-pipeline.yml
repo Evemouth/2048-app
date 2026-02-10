@@ -1,9 +1,25 @@
 name: Hello Pipelines World
 run-name: Hello pipelines' world pipeline
-on: [push]
+on:
+  push:
+  workflow_dispatch:
 jobs:
   hello-job:
     runs-on: ubuntu-latest
     steps:
-      - name: Say Hello
-        run: echo "Hello pipelines' world !"
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+      
+      - name: Execute Lab 2 Script
+        run: bash pipeline/pipeline.sh
