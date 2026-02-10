@@ -1,5 +1,5 @@
-name: Hello Pipelines World
-run-name: Hello pipelines' world pipeline
+name: Script Pipeline
+run-name: Script Pipeline
 on:
   push:
   workflow_dispatch:
@@ -20,6 +20,9 @@ jobs:
         with:
           node-version: '20'
           cache: 'pnpm'
+      
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
       
       - name: Execute Lab 2 Script
         run: bash pipeline/pipeline.sh
