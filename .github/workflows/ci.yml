@@ -1,0 +1,80 @@
+name: CI Pipeline
+
+on:
+  push:
+  workflow_dispatch:
+#     branches: [main, develop, 'feature/**']
+#   pull_request:
+#     branches: [main, develop]
+#   schedule:
+#     - cron: '0 8 * * *'  # Tous les jours à 8h
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Type checking
+        run: pnpm nuxt typecheck
+
+      - name: Static analysis (ESLint)
+        run: pnpm eslint . --ext .ts,.vue
+
+      - name: Build production package
+        run: pnpm nuxi build
+
+      - name: Run tests
+        run: pnpm vitest run
+
+      - name: Upload artifact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 2048-app-build
+          path: publish/
+          retention-days: 30
+
+      - name: Test artifact integrity
+        if: success()
+        run: |
+          if [ -d "publish" ]; then
+            echo "✓ Artifact directory exists"
+            ls -lah publish/
+          else
+            echo "✗ Artifact directory not found"
+            exit 1
+          fi
