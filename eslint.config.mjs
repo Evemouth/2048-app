@@ -30,6 +30,6 @@ export default withNuxt(
     },
   },
   {
-    ignores: ['.nuxt/**', 'publish/**', 'node_modules/**', 'dist/**'],
+    ignores: ['.nuxt/**', '.output/**', 'publish/**', 'node_modules/**', 'dist/**'],
   }
 )
