@@ -1,5 +1,5 @@
 name: CI Pipeline
-
+run-name: CI Pipeline
 on:
   push:
   workflow_dispatch:
@@ -52,7 +52,7 @@ jobs:
         run: pnpm nuxt typecheck
 
       - name: Static analysis (ESLint)
-        run: pnpm eslint . --ext .ts,.vue
+        run: pnpm lint
 
       - name: Build production package
         run: pnpm nuxi build
