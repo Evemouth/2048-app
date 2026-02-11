@@ -65,15 +65,15 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: 2048-app-build
-          path: publish/
+          path: .output/
           retention-days: 30
 
       - name: Test artifact integrity
         if: success()
         run: |
-          if [ -d "publish" ]; then
+          if [ -d ".output" ]; then
             echo "✓ Artifact directory exists"
-            ls -lah publish/
+            ls -lah .output/
           else
             echo "✗ Artifact directory not found"
             exit 1
