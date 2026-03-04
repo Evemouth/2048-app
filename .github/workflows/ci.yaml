@@ -14,6 +14,20 @@ on:
     paths-ignore:
       - "docs/**"
   workflow_dispatch:
+    inputs:
+      run_analyses:
+        description: "Run static analyses and tests"
+        required: false
+        type: boolean
+        default: true
+      environment:
+        description: "Select environment for the workflow"
+        required: false
+        type: choice
+        options:
+          - QA
+          - PROD
+          - UAT
 
 env:
   NODE_VERSION: "22"
@@ -57,7 +71,7 @@ jobs:
   static-analysis:
     runs-on: ubuntu-latest
     needs: [build]
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'pull_request' || (github.event_name == 'workflow_dispatch' && inputs.run_analyses == true)
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -73,7 +87,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     needs: [build]
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'pull_request' || (github.event_name == 'workflow_dispatch' && inputs.run_analyses == true)
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -84,3 +98,13 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
       - run: pnpm test
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build]
+    if: github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Deploy
+        run: echo "Deploying to $ENVIRONMENT"
+        env:
+          ENVIRONMENT: ${{ inputs.environment }}
