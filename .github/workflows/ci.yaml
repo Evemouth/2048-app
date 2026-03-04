@@ -52,7 +52,7 @@ jobs:
         with:
           name: build-output
           path: .output/
-          retention-days: 7
+          retention-days: ${{ github.ref == 'refs/heads/main' && 7 || 1 }} # Retain artifacts for 7 days on main branch, 1 day for others
 
   static-analysis:
     runs-on: ubuntu-latest
