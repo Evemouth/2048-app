@@ -1,0 +1,47 @@
+workflow:
+  image: node:$NODE_VERSION
+
+stages:
+  - build
+  - lint
+  - typecheck
+  - test
+  - deploy
+
+before_script:
+  - npm install -g pnpm
+  - pnpm install
+
+variables:
+  NODE_VERSION: "22"
+
+build:
+  stage: build
+  script:
+    - pnpm build
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "lab4"'
+
+lint:
+  stage: lint
+  needs: ["build"]
+  script:
+    - pnpm lint
+
+typecheck:
+  stage: typecheck
+  needs: ["build"]
+  script:
+    - pnpm typecheck
+
+test:
+  stage: test
+  needs: ["build"]
+  script:
+    - pnpm test
+
+deploy:
+  stage: deploy
+  needs: ["build"]
+  script:
+    - echo "Deploying to QA"
