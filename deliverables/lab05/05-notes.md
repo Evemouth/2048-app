@@ -11,8 +11,11 @@
 
 - Environment Secrets VS Environment Variables
   - Secrets : apparaissent pas dans les logs
+  - Associer les secrets à un environnement et pas à un dépot
 
 - Preview / Production
+
+- Utilisation d'un agent dans le répo GitHub → a accès au pipeline et à leur résultat (contexte)
 
 **Vercel**
 
