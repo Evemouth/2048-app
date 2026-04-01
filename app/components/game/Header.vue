@@ -10,7 +10,7 @@ const { score, bestScore } = useGameState();
       2048
     </h1>
     <div class="flex gap-2">
-      <GameScoreDisplay label="MYScore" :value="score" />
+      <GameScoreDisplay label="My Score" :value="score" />
       <GameScoreDisplay label="Best" :value="bestScore" />
     </div>
   </header>
